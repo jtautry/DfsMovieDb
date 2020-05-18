@@ -108,7 +108,7 @@ namespace Autry.DfsMovieDb.Controllers
         }
 
         /// <summary>
-        /// Testing Devops Pipeline. Create a new actor.  Note: First and last names are required.
+        /// Create a new actor.  Note: First and last names are required.
         /// </summary>
         /// <param name="actorCreateDto">ActorCreateDto</param>
         /// <returns></returns>
