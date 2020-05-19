@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Autry.DfsMovieDb.Controllers
@@ -71,7 +70,7 @@ namespace Autry.DfsMovieDb.Controllers
         /// </summary>
         /// <param name="id">ActorId</param>
         /// <returns></returns>
-        [HttpGet("{id:int}/movies")] //api/actors/20/movies
+        [HttpGet("{id:int}/movies", Name = "getActorMovies")] //api/actors/20/movies
         public async Task<ActionResult<List<MovieListDto>>> GetActorMovies(int id)
         {
             _logger.LogInformation($"GetActorMovies for ActorID:{id}");
@@ -112,7 +111,7 @@ namespace Autry.DfsMovieDb.Controllers
         /// </summary>
         /// <param name="actorCreateDto">ActorCreateDto</param>
         /// <returns></returns>
-        [HttpPost] //api/actors
+        [HttpPost(Name = "createActor")] //api/actors
         public async Task<ActionResult> CreateActor(ActorCreateDto actorCreateDto)
         {
             _logger.LogInformation($"Create actor: {actorCreateDto}");

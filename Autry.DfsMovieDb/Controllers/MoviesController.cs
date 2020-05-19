@@ -31,7 +31,7 @@ namespace Autry.DfsMovieDb.Controllers
         /// Get all movies ordered by Year (descending) and Title.  Note: Pagination is not implemented at this time.
         /// </summary>
         /// <returns></returns>
-        [HttpGet] //api/movies
+        [HttpGet(Name = "getMovies")] //api/movies
         public async Task<ActionResult<List<MovieListDto>>> GetAllMovies()
         {
             var movies = await _context.Movies
@@ -49,7 +49,7 @@ namespace Autry.DfsMovieDb.Controllers
         /// </summary>
         /// <param name="id">MovieId</param>
         /// <returns></returns>
-        [HttpGet("{id:int}")] //api/movies/10
+        [HttpGet("{id:int}", Name = "getMovieById")] //api/movies/10
         public async Task<ActionResult<MovieDto>> GetMovie(int id)
         {
             var movie = await _context.Movies
@@ -72,7 +72,7 @@ namespace Autry.DfsMovieDb.Controllers
         /// </summary>
         /// <param name="id">MovieId</param>
         /// <returns></returns>
-        [HttpGet("{id:int}/actors")] //api/movies/10/actors
+        [HttpGet("{id:int}/actors", Name = "getMovieActors")] //api/movies/10/actors
         public async Task<ActionResult<List<ActorDto>>> GetMovieActors(int id)
         {
             var exists = await _context.Movies.AnyAsync(m => m.MovieId == id);
@@ -92,7 +92,7 @@ namespace Autry.DfsMovieDb.Controllers
         /// </summary>
         /// <param name="movieCreateDto">MovieCreateDto</param>
         /// <returns></returns>
-        [HttpPost] //api/movies
+        [HttpPost(Name = "createMovie")] //api/movies
         public async Task<ActionResult<MovieDto>> CreateMovie(MovieCreateDto movieCreateDto)
         {
             for (int i = movieCreateDto.ActorIds.Count - 1; i >= 0; i--)
@@ -137,7 +137,7 @@ namespace Autry.DfsMovieDb.Controllers
         /// <param name="id">MovieId</param>
         /// <param name="movieActorDto">MovieActorDto</param>
         /// <returns></returns>
-        [HttpPost("{id}/actors")] //api/movies/10/actors
+        [HttpPost("{id}/actors", Name = "addActorToMovie")] //api/movies/10/actors
         public async Task<ActionResult<List<ActorDto>>> CreateMovieActor(int id, MovieActorDto movieActorDto)
         {
             //TODO find a better way to do this, it results in 3 db calls and no guarantee
@@ -185,7 +185,7 @@ namespace Autry.DfsMovieDb.Controllers
         /// <param name="id">MovieId</param>
         /// <param name="movieUpdateDto">MovieUpdateDto</param>
         /// <returns></returns>
-        [HttpPut("{id}")] //api/movies/10
+        [HttpPut("{id}", Name = "updateMovie")] //api/movies/10
         public async Task<ActionResult> UpdateMovie(int id, MovieUpdateDto movieUpdateDto)
         {
             var movie = _mapper.Map<Movie>(movieUpdateDto);
@@ -210,7 +210,7 @@ namespace Autry.DfsMovieDb.Controllers
         /// </summary>
         /// <param name="id">MovieId</param>
         /// <returns></returns>
-        [HttpDelete("{id}")] //api/movies/10
+        [HttpDelete("{id}", Name = "deleteMovie")] //api/movies/10
         public async Task<ActionResult> DeleteMovie(int id)
         {
             var movie = await _context.Movies.FindAsync(id);
