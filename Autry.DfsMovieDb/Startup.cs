@@ -32,7 +32,8 @@ namespace Autry.DfsMovieDb
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddXmlDataContractSerializerFormatters();
 
             services.AddSwaggerGen(config =>
             {
